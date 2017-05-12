@@ -40,10 +40,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        String jamesbond = "hi";
-        String jamesBond = "hello";
-        String s = jamesBond + jamesbond;
-    }
+        }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
