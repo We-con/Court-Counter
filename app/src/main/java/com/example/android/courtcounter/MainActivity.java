@@ -119,9 +119,10 @@ public class MainActivity extends AppCompatActivity {
      * Resets the score for both teams back to 0.
      */
     public void resetScore(View v) {
-        
-        displayForTeamA(reset);
-        displayForTeamB(reset);
+        scoreTeamA = 0;
+        scoreTeamB = 0;
+        displayForTeamA(scoreTeamA);
+        displayForTeamB(scoreTeamB);
     }
 
     /**
