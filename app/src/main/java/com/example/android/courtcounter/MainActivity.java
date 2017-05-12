@@ -32,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
     // Tracks the score for Team B
     int scoreTeamB = 0;
+    
+    //resets scores for Team A and B
+    int reset = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,10 +119,9 @@ public class MainActivity extends AppCompatActivity {
      * Resets the score for both teams back to 0.
      */
     public void resetScore(View v) {
-        scoreTeamA = 0;
-        scoreTeamB = 0;
-        displayForTeamA(scoreTeamA);
-        displayForTeamB(scoreTeamB);
+        
+        displayForTeamA(reset);
+        displayForTeamB(reset);
     }
 
     /**
