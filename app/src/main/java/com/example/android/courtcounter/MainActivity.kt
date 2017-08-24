@@ -15,30 +15,31 @@
  */
 package com.example.android.courtcounter
 
+import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import com.example.android.courtcounter.viewmodel.ScoreViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * This activity keeps track of the basketball score for 2 teams.
  */
 class MainActivity : AppCompatActivity() {
 
-    // Tracks the score for Team A
-    var scoreTeamA = 0
-
-    // Tracks the score for Team B
-    var scoreTeamB = 0
-
-    //resets scores for Team A and B
-    var reset = 0
+    private lateinit var viewModel : ScoreViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        viewModel = ViewModelProviders.of(this).get(ScoreViewModel::class.java)
+        displayForTeamA(viewModel.getScore('A'))
+        displayForTeamB(viewModel.getScore('B'))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -64,73 +65,70 @@ class MainActivity : AppCompatActivity() {
      * Increase the score for Team A by 1 point.
      */
     fun addOneForTeamA(v: View) {
-        scoreTeamA = scoreTeamA + 1
-        displayForTeamA(scoreTeamA)
+        viewModel.addPoint(1, 'A')
+        displayForTeamA(viewModel.getScore('A'))
     }
 
     /**
      * Increase the score for Team A by 2 points.
      */
     fun addTwoForTeamA(v: View) {
-        scoreTeamA = scoreTeamA + 2
-        displayForTeamA(scoreTeamA)
+        viewModel.addPoint(2, 'A')
+        displayForTeamA(viewModel.getScore('A'))
     }
 
     /**
      * Increase the score for Team A by 3 points.
      */
     fun addThreeForTeamA(v: View) {
-        scoreTeamA = scoreTeamA + 3
-        displayForTeamA(scoreTeamA)
+        viewModel.addPoint(3, 'A')
+        displayForTeamA(viewModel.getScore('A'))
     }
 
     /**
      * Increase the score for Team B by 1 point.
      */
     fun addOneForTeamB(v: View) {
-        scoreTeamB = scoreTeamB + 1
-        displayForTeamB(scoreTeamB)
+        viewModel.addPoint(1, 'B')
+        displayForTeamB(viewModel.getScore('B'))
     }
 
     /**
      * Increase the score for Team B by 2 points.
      */
     fun addTwoForTeamB(v: View) {
-        scoreTeamB = scoreTeamB + 2
-        displayForTeamB(scoreTeamB)
+        viewModel.addPoint(2, 'B')
+        displayForTeamB(viewModel.getScore('B'))
     }
 
     /**
      * Increase the score for Team B by 3 points.
      */
     fun addThreeForTeamB(v: View) {
-        scoreTeamB = scoreTeamB + 3
-        displayForTeamB(scoreTeamB)
+        viewModel.addPoint(3, 'B')
+        displayForTeamB(viewModel.getScore('B'))
     }
 
     /**
      * Resets the score for both teams back to 0.
      */
     fun resetScore(v: View) {
-        scoreTeamA = 0
-        scoreTeamB = 0
-        displayForTeamA(scoreTeamA)
-        displayForTeamB(scoreTeamB)
+        viewModel.resetScore()
+        displayForTeamA(viewModel.getScore('A'))
+        displayForTeamB(viewModel.getScore('B'))
     }
 
     /**
      * Displays the given score for Team A.
      */
     fun displayForTeamA(score: Int) {
-        val scoreView = findViewById<View>(R.id.team_a_score) as TextView
-        scoreView.text = score.toString()
+        text_team_a_score.text = score.toString()
     }
 
     /**
      * Displays the given score for Team B.
      */
     fun displayForTeamB(score: Int) {
-        val scoreView = findViewById<View>(R.id.team_b_score) as TextView
-        scoreView.text = score.toString()
+        text_team_b_score.text = score.toString()
     }
 }
